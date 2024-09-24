@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 18px; /* Increased font size */
+            color: #333; /* Color for better visibility */
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            width: 48%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn.cancel {
+            background-color: #dc3545;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn.cancel:hover {
+            background-color: #c82333;
+        }
+
+        /* Hide form initially */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="formContainer">
+        <h2>Student Registration Form</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="stud_name">Student Name</label>
+                <input type="text" id="stud_name" name="stud_name" class="form-control" placeholder="Enter full name" required>
+            </div>
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+                <select name="Gender" id="Gender" class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Department">Department</label>
+                <input type="text" id="Department" name="Department" class="form-control" placeholder="Enter department" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter email address" required>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn">Submit</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+            </div>
+        </form>
+        {% if message %}
+        <h2>{{ message }}</h2>
+        {% endif %}
+    </div>
+
+    <script>
+        function closeForm() {
+            // Hides the form when the "Cancel" button is clicked
+            document.getElementById("formContainer").classList.add("hidden");
+        }
+    </script>
+</body>
+</html>
